@@ -5,7 +5,7 @@ Un widget iPhone qui affiche les pull requests qui attendent ta review, et qui *
 - **Connexion GitHub sans token** : « Se connecter avec GitHub » ouvre l'écran d'autorisation officiel de GitHub (OAuth, *device flow*). Rien à copier à part un code court.
 - **Tu choisis les repositories** : l'app ne voit que les repos auxquels tu donnes accès en installant la GitHub App, et tu peux encore filtrer parmi eux dans l'app.
 - **Détection** : PR ouvertes où ta review est demandée (y compris via une équipe), et en option celles qui te sont assignées.
-- **Animation sobre** : la cloche se balance deux fois, deux ondes vertes se diffusent, la carte de la PR glisse depuis le bas avec un badge « NOUVELLE PR », et le compteur défile. Le widget reste ensuite légèrement éclairé en vert tant que tu n'as pas ouvert la PR (24 h max).
+- **Animation sobre** : la campanule (la fleur-cloche de l'icône) se balance deux fois, son battant à contretemps, deux ondes indigo se diffusent, la carte de la PR glisse depuis le bas avec un badge « NOUVELLE PR », et le compteur défile. La fleur reste ensuite en pleines couleurs, avec une lueur lavande, tant que tu n'as pas ouvert la PR (24 h max) ; au repos elle est plus pâle.
 - Toucher le widget ouvre la PR (dans l'app GitHub si elle est installée) et la marque comme vue.
 
 ## Mise en place
@@ -74,7 +74,7 @@ Sur l'écran de connexion, **Utiliser un token personnel**. Crée un *fine-grain
 ## Ce qu'il faut savoir
 
 - **Ce n'est pas instantané.** iOS décide quand un widget peut se rafraîchir. Le widget demande une mise à jour toutes les 10 minutes et l'app profite en plus des réveils en arrière-plan, mais en pratique compte **de 10 à 30 minutes** entre l'ouverture d'une PR et l'animation. Touche l'heure affichée dans le widget moyen ou grand pour forcer une vérification.
-- **L'animation est jouée une seule fois par PR** (et par format de widget), au rafraîchissement qui la détecte, si elle date de moins de 45 min. Elle est faite de 4 étapes de timeline espacées de 1,2 s ; si iOS n'affiche pas le widget à ce moment-là (écran éteint par exemple), tu verras directement l'état final : badge « NOUVELLE PR » et lueur verte.
+- **L'animation est jouée une seule fois par PR** (et par format de widget), au rafraîchissement qui la détecte, si elle date de moins de 45 min. Elle est faite de 4 étapes de timeline espacées de 1,2 s ; si iOS n'affiche pas le widget à ce moment-là (écran éteint par exemple), tu verras directement l'état final : badge « NOUVELLE PR » et lueur lavande.
 - Au premier lancement, et chaque fois que tu changes la liste des repos, les PR déjà en attente sont considérées comme vues : pas de fausse alerte.
 - Les requêtes passent par l'API de recherche GitHub (`is:pr is:open review-requested:@me`, plus `assignee:@me` en option), limitée aux repos choisis.
 
@@ -94,6 +94,9 @@ Shared/                      Compilé dans l'app ET le widget
   SharedStore.swift          Réglages, PR déjà vues, état « nouvelle », animations déjà jouées
   Keychain.swift             Trousseau partagé (lisible iPhone verrouillé, pour StandBy)
   RefreshIntent.swift        Bouton « rafraîchir » du widget
+  Theme.swift                Palette « Bleuet » et campanule dessinée en SwiftUI
 App/                         L'app : connexion, liste des PR, choix des repos, réglages
 Widget/                      Timeline (séquence d'animation) et vues du widget
+Design/icon-final/           Icône (SVG + script) ; AppIcon.png en est l'export 1024 px
+Design/icon-proposals/       Pistes d'icône écartées, gardées pour mémoire
 ```

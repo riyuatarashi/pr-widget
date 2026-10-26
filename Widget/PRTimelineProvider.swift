@@ -19,6 +19,16 @@ struct PREntry: TimelineEntry {
             case .calm, .settle: 0
             }
         }
+
+        /// Le battant part à contretemps de la fleur.
+        var clapperAngle: Double {
+            switch self {
+            case .ring: 14
+            case .swing: -12
+            case .ringAgain: 8
+            case .calm, .settle: 0
+            }
+        }
     }
 
     let date: Date

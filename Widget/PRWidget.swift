@@ -25,7 +25,6 @@ struct PRWidgetView: View {
 
     var body: some View {
         content
-            .environment(\.colorScheme, .dark)
             .containerBackground(for: .widget) {
                 if family.isAccessory {
                     Color.clear
@@ -113,7 +112,7 @@ struct MediumView: View {
                         .id(pr.id)
                         .transition(.push(from: .bottom))
                     if let next = entry.others.first {
-                        Divider().overlay(Color.white.opacity(0.08))
+                        Divider().overlay(Color.primary.opacity(0.08))
                         Link(destination: DeepLink.open(next)) {
                             PRRow(pr: next, isNew: entry.isNew(next))
                         }
@@ -150,7 +149,7 @@ struct LargeView: View {
                     SpotlightView(pr: pr, isNew: entry.isNew(pr), avatar: entry.avatar, titleLines: 3)
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(.white.opacity(entry.isNew(pr) ? 0.09 : 0.05), in: .rect(cornerRadius: 14))
+                        .background(Color.prAccent.opacity(entry.isNew(pr) ? 0.12 : 0.06), in: .rect(cornerRadius: 14))
                 }
                 .id(pr.id)
                 .transition(.push(from: .bottom))
@@ -180,8 +179,8 @@ struct CircularView: View {
         ZStack {
             AccessoryWidgetBackground()
             VStack(spacing: 0) {
-                Image(systemName: entry.isAlerting ? "bell.badge.fill" : "bell.fill")
-                    .font(.system(size: 14, weight: .semibold))
+                Campanula(clapperSwing: entry.phase.clapperAngle)
+                    .frame(height: 16)
                     .rotationEffect(.degrees(entry.phase.bellAngle), anchor: .top)
                 Text("\(entry.count)")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
@@ -199,7 +198,8 @@ struct RectangularView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 1) {
             HStack(spacing: 4) {
-                Image(systemName: entry.isAlerting ? "bell.badge.fill" : "bell.fill")
+                Campanula(clapperSwing: entry.phase.clapperAngle)
+                    .frame(height: 16)
                     .rotationEffect(.degrees(entry.phase.bellAngle), anchor: .top)
                 Text(entry.count == 0 ? "Rien à reviewer" : "\(entry.count) à reviewer")
                     .contentTransition(.numericText(value: Double(entry.count)))

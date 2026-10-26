@@ -3,18 +3,23 @@ import SwiftUI
 import UIKit
 import WidgetKit
 
+/// Crème comme l'icône sur l'écran d'accueil, nuit violette en mode sombre.
+/// (En StandBy, iOS retire ce fond et affiche le contenu sur du noir.)
 struct WidgetBackground: View {
     let isAlerting: Bool
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color(red: 0.09, green: 0.10, blue: 0.12), Color(red: 0.05, green: 0.06, blue: 0.07)],
+                colors: colorScheme == .dark
+                    ? [Color(hex: 0x1A1824), Color(hex: 0x0D0C12)]
+                    : [Color.bleuetCream, Color(hex: 0xFCE9D6)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
             RadialGradient(
-                colors: [Color.prAccent.opacity(isAlerting ? 0.28 : 0), .clear],
+                colors: [Color.bleuetLavender.opacity(isAlerting ? (colorScheme == .dark ? 0.32 : 0.26) : 0), .clear],
                 center: .topLeading,
                 startRadius: 0,
                 endRadius: 220
@@ -23,7 +28,8 @@ struct WidgetBackground: View {
     }
 }
 
-/// La cloche et ses ondes : c'est elle qui « sonne » quand une PR arrive.
+/// La campanule et ses ondes : c'est elle qui « sonne » quand une PR arrive.
+/// Au repos elle est un peu éteinte ; quand une PR attend, elle reprend toutes ses couleurs.
 struct BellView: View {
     let phase: PREntry.Phase
     let isAlerting: Bool
@@ -35,14 +41,15 @@ struct BellView: View {
             ripple(visible: phase == .ringAgain, expanded: phase == .settle)
 
             Circle()
-                .fill(Color.prAccent.opacity(isAlerting ? 0.22 : 0.10))
+                .fill(Color.prAccent.opacity(isAlerting ? 0.16 : 0.08))
 
-            Image(systemName: isAlerting ? "bell.badge.fill" : "bell.fill")
-                .font(.system(size: size * 0.44, weight: .semibold))
-                .foregroundStyle(isAlerting ? Color.prAccent : Color.secondary)
-                .contentTransition(.symbolEffect(.replace))
-                .rotationEffect(.degrees(phase.bellAngle), anchor: UnitPoint(x: 0.5, y: 0.12))
+            Campanula(clapperSwing: phase.clapperAngle)
+                .frame(height: size * 0.64)
+                .saturation(isAlerting ? 1 : 0.35)
+                .rotationEffect(.degrees(phase.bellAngle), anchor: .top)
+                .offset(y: -size * 0.02)
                 .animation(.spring(duration: 0.7, bounce: 0.55), value: phase)
+                .animation(.smooth, value: isAlerting)
         }
         .frame(width: size, height: size)
         .widgetAccentable()
@@ -75,7 +82,7 @@ struct NewBadge: View {
         Text("NOUVELLE PR")
             .font(.system(size: 9, weight: .heavy))
             .tracking(0.6)
-            .foregroundStyle(.black)
+            .foregroundStyle(Color.prOnAccent)
             .padding(.horizontal, 6)
             .padding(.vertical, 2)
             .background(Color.prAccent, in: .capsule)
@@ -125,7 +132,7 @@ struct PRRow: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
             Circle()
-                .fill(isNew ? Color.prAccent : Color.white.opacity(0.18))
+                .fill(isNew ? Color.prAccent : Color.primary.opacity(0.18))
                 .frame(width: 7, height: 7)
                 .widgetAccentable()
             VStack(alignment: .leading, spacing: 1) {
@@ -165,7 +172,7 @@ struct CalmView: View {
         VStack(alignment: .leading, spacing: 3) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.title3)
-                .foregroundStyle(Color.prAccent)
+                .foregroundStyle(Color.prLeaf)
                 .widgetAccentable()
             Text("Tout est calme")
                 .font(.headline)

@@ -42,11 +42,16 @@ struct SignInView: View {
 
     private var header: some View {
         VStack(spacing: 12) {
-            Image(systemName: "bell.badge.fill")
-                .font(.system(size: 56, weight: .semibold))
-                .foregroundStyle(Color.prAccent)
-                .symbolEffect(.bounce, options: .repeating.speed(0.3))
-                .padding(.top, 40)
+            // La campanule tinte doucement, avec une pause entre deux balancements.
+            // Les dernières valeurs, quasi nulles et toutes différentes, font la pause.
+            PhaseAnimator([0.0, -12, 9, -4, 0.3, 0.1, 0.4, 0.2]) { angle in
+                Campanula(clapperSwing: -angle * 1.2)
+                    .frame(height: 96)
+                    .rotationEffect(.degrees(angle), anchor: .top)
+            } animation: { angle in
+                abs(angle) < 1 ? Animation.easeInOut(duration: 0.7) : Animation.spring(duration: 0.6, bounce: 0.4)
+            }
+            .padding(.top, 40)
             Text("PR Radar")
                 .font(.largeTitle.bold())
             Text("Une petite cloche sur ton iPhone dès qu'une pull request attend ta review.")

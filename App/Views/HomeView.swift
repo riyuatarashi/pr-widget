@@ -53,7 +53,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Label("Tout est calme", systemImage: "checkmark.seal.fill")
                         .font(.headline)
-                        .foregroundStyle(Color.prAccent)
+                        .foregroundStyle(Color.prLeaf)
                     Text("Aucune pull request n'attend ta review.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -162,7 +162,7 @@ private struct PullRequestRow: View {
                     if isNew {
                         Text("Nouvelle")
                             .font(.caption2.bold())
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Color.prOnAccent)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 1)
                             .background(Color.prAccent, in: .capsule)
