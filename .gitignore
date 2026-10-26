@@ -1,0 +1,20 @@
+# Généré par XcodeGen
+*.xcodeproj/
+*.xcworkspace/
+
+# Config locale (Client ID, Team ID…)
+Config/Local.xcconfig
+
+# Xcode
+DerivedData/
+build/
+xcuserdata/
+*.xcuserstate
+
+.DS_Store
+
+# Générés par XcodeGen à partir de project.yml
+App/Info.plist
+App/PRRadar.entitlements
+Widget/Info.plist
+Widget/PRRadarWidget.entitlements

@@ -1,0 +1,10 @@
+// Copie ce fichier vers Config/Local.xcconfig puis remplis-le.
+
+// Ton Team ID Apple (Xcode > Settings > Accounts, ou developer.apple.com > Membership)
+DEVELOPMENT_TEAM = ABCDE12345
+
+// Préfixe unique pour les bundle IDs (et l'App Group group.<prefix>.prradar)
+BUNDLE_ID_PREFIX = fr.tonnom
+
+GITHUB_CLIENT_ID = Iv23liXXXXXXXXXXXXXX
+GITHUB_APP_SLUG = pr-radar-tonlogin

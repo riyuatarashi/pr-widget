@@ -1,0 +1,12 @@
+// Valeurs par défaut. Ne mets PAS tes valeurs ici : copie
+// Config/Local.example.xcconfig vers Config/Local.xcconfig (ignoré par git).
+
+DEVELOPMENT_TEAM =
+BUNDLE_ID_PREFIX = com.example
+
+// Client ID de ta GitHub App (ex : Iv23liAbCdEf123456)
+GITHUB_CLIENT_ID =
+// Slug de ta GitHub App, tel qu'il apparaît dans https://github.com/apps/<slug>
+GITHUB_APP_SLUG =
+
+#include? "Local.xcconfig"
