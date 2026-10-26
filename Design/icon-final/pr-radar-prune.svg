@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<rect width="1024" height="1024" fill="#FFF1EA"/>
+<g transform="translate(-40,0)">
+  <path d="M360,900 C352,760 350,600 372,470 C400,320 480,236 580,226 C650,220 700,262 700,316" fill="none" stroke="#2F4858" stroke-linecap="round" stroke-linejoin="round" stroke-width="40"/>
+  <path d="M357,852 C357,794 240,800 240,738 L240,628 C240,566 362,572 367,512" fill="none" stroke="#2F4858" stroke-linecap="round" stroke-linejoin="round" stroke-width="34"/>
+  <circle cx="240" cy="683" r="40" fill="#FFF1EA" stroke="#2F4858" stroke-width="24"/>
+  <path d="M357,792 C404,716 488,698 560,714 C530,790 446,818 357,792 Z" fill="#2F4858"/>
+  <g transform="translate(700,316) scale(0.86)">
+  <path d="M0,430 L0,486" stroke="#2F4858" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="0" cy="512" r="34" fill="#8E3B6B"/>
+  <path d="M0,6 C70,10 104,80 106,170 C110,270 150,336 200,398 C140,422 76,440 0,444 C-76,440 -140,422 -200,398 C-150,336 -110,270 -106,170 C-104,80 -70,10 0,6 Z" fill="#FFD3B6"/>
+  <path d="M0,0 C-70,4 -110,74 -114,164 C-118,264 -160,334 -222,394 C-164,414 -104,422 -46,414 C-34,300 -22,120 0,0 Z" fill="#8E3B6B"/>
+  <path d="M0,0 C70,4 110,74 114,164 C118,264 160,334 222,394 C164,414 104,422 46,414 C34,300 22,120 0,0 Z" fill="#E7A0C4"/>
+</g>
+</g>
+</svg>
